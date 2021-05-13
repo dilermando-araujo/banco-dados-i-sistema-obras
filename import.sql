@@ -1,3 +1,5 @@
+create database db_obras;
+
 create table funcionarios_prefeitura_cargos (
     codigo int not null,
     nome varchar(200) not null,
@@ -56,3 +58,90 @@ create table reunioes_participantes (
         foreign key(matricula_participante)
         references funcionarios_prefeitura(matricula)
 );
+
+create table obras (
+	codigo int not null,
+    associacao_bairro_idealizadora int,
+    engenheiro_responsavel int,
+    segmento int,
+    prioridade int,
+    situacao int,
+    descricao varchar(200),
+    data_previsao_inicio date,
+    data_previsao_termino date,
+    valor_estimado decimal(10.2),
+    
+    constraint pk_obras primary key (codigo)
+);
+
+create table obras_ocorrencias (
+	codigo int not null,
+    obra int,
+    ocorrida_em datetime,
+    descricao varchar(200),
+    
+    constraint pk_obras_ocorrencias primary key (codigo)
+);
+
+create table obras_vistorias (
+	codigo int not null,
+    obra int,
+    engenheiro_responsavel int,
+    realizada_em date,
+    percentual_esperado decimal (10,2),
+    percentual_realizado decimal (10,2),
+	
+    constraint pk_obras_vistorias primary key (codigo)
+);
+
+create table obras_vistorias_inconformidade (
+	codigo int not null,
+    vistoria int,
+    descricao varchar(200),
+    
+    constraint pk_obras_vistorias_inconformidade primary key (codigo)
+);
+
+create table obras_segmentos (
+	codigo int not null,
+    nome varchar(200),
+    
+    constraint pk_obras_segmentos primary key(codigo)
+);
+
+create table obras_situacoes (
+	codigo int not null,
+    nome varchar(200),
+    
+    constraint pk_obras_situacoes primary key (codigo)
+);
+
+create table obras_niveis_prioridade (
+	codigo int not null,
+    nome varchar(200),
+    
+    constraint pk_obras_niveis_prioridade primary key (codigo)
+);
+
+create table engenheiros (
+	crea int not null,
+    nome varchar(200),
+    sexo varchar(1),
+    especialidade int,
+    telefone_celular int,
+    telefone_residencial int,
+    email varchar(200),
+    endereco_residencial varchar(200),
+    data_admissao_prefeitura date,
+    
+    constraint pk_engenheiros primary key (crea)
+);
+
+create table engenheiros_especialidade (
+	codigo int not null,
+    nome varchar(200),
+    
+    constraint pk_engenheiros_especialidade primary key (codigo)
+);
+
+
