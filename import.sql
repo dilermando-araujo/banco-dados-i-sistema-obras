@@ -1,4 +1,5 @@
 create database db_obras;
+use db_obras;
 
 create table funcionarios_prefeitura_cargos (
     codigo int not null,
